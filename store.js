@@ -267,6 +267,14 @@ function load() {
   if (!db.follows) db.follows = [];
   if (!db.media) db.media = [];
   if (!db.sitePages) db.sitePages = [];
+  // R1 修复：旧库用户 role 全为 author（早于 admin 种子生成），强制将演示账号
+  // u_demo 提升为 admin，使后台「站点内容」编辑器可见可用。不覆盖其他真实 admin。
+  const demoUser = (db.users || []).find((u) => u.id === 'u_demo');
+  if (demoUser && demoUser.role !== 'admin') {
+    demoUser.role = 'admin';
+    logger.info('迁移：u_demo 角色已提升为 admin（R1 修复）');
+    save();
+  }
   // 旧库升级：注入默认站点页面（角色志 / 关于），后续由管理员在后台编辑
   if (!db.sitePages.length) {
     const uid = (db.users[0] && db.users[0].id) || 'u_demo';
