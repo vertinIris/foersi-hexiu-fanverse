@@ -24,7 +24,9 @@
     const matureGated = (work.rating === 'M' || work.rating === 'E') && localStorage.getItem('fh_age_ok') !== '1';
     root.innerHTML = `
       <div class="work-hero">
-        <div class="work-cover" aria-hidden="true">${escapeHtml(work.title.slice(0, 1))}</div>
+        ${work.cover && safeUrl(work.cover)
+          ? `<img class="work-cover" src="${safeUrl(work.cover)}" alt="${escapeHtml(work.title)} 封面" loading="lazy">`
+          : `<div class="work-cover" aria-hidden="true">${escapeHtml(work.title.slice(0, 1))}</div>`}
         <div class="work-info">
           <h1>${escapeHtml(work.title)}</h1>
           <div class="work-sub">
