@@ -2,6 +2,7 @@
   "name": "foersi-hexiu-fanverse",
   "version": "1.0.0",
   "description": "佛尔思和休同人作品站 - 在线阅读与作家上传管理",
+  "private": true,
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -14,6 +14,8 @@ node server.js
 
 零依赖、零构建：纯 Node.js 内置模块 + 原生前端，无需 `npm install`。
 
+> ⚠️ **本项目刻意保持「零依赖」**：禁止执行 `npm install` / `yarn install` / `pnpm install`，也不要 `npm publish`（package.json 已设 `"private": true`）。任何第三方依赖都会破坏「克隆即跑」约定与文档中的技术约束。
+
 ## 演示账号
 
 - 用户名：`休之笔`
