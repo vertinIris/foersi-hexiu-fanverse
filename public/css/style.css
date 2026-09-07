@@ -936,3 +936,10 @@ footer.site {
   transform:translateX(-100%); animation:fh-shimmer 1.25s infinite;
 }
 @keyframes fh-shimmer { to { transform:translateX(100%); } }
+
+/* 阅读进度条（固定顶部细线） */
+.read-progress {
+  position:fixed; top:0; left:0; height:3px; width:0;
+  background:linear-gradient(90deg, var(--c-primary), var(--c-accent));
+  z-index:60; transition:width .12s linear; pointer-events:none;
+}

@@ -1,5 +1,18 @@
 (async function () {
   await initPage('');
+  // 阅读进度条（固定顶部细线，随滚动推进）
+  const readProgress = document.createElement('div');
+  readProgress.className = 'read-progress';
+  readProgress.id = 'readProgress';
+  document.body.appendChild(readProgress);
+  function updateReadProgress() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const p = h > 0 ? Math.min(100, Math.max(0, (window.scrollY / h) * 100)) : 0;
+    readProgress.style.width = p + '%';
+  }
+  window.addEventListener('scroll', updateReadProgress, { passive: true });
+  window.addEventListener('resize', updateReadProgress);
+
   const url = new URLSearchParams(location.search);
   const workId = url.get('work');
   let chapterId = url.get('chapter');
@@ -44,6 +57,7 @@
     renderToolbar(idx);
     applyFont();
     window.scrollTo({ top: 0 });
+    updateReadProgress();
   }
 
   function renderToolbar(idx) {
