@@ -580,6 +580,7 @@ textarea { line-height:1.8; resize:vertical; }
 }
 .form-row input, .form-row textarea, .form-row select { width:100%; }
 .form-row textarea { min-height:120px; }
+.cover-prev { width:120px; aspect-ratio:3/4; object-fit:cover; border-radius:var(--r-sm); border:1px solid var(--c-line); margin-bottom:8px; display:block; }
 .form-hint, .form-tip {
   display:block; margin-top:6px;
   font-family:var(--font-sans); font-size:.75rem; line-height:1.7; color:var(--c-text-faint);

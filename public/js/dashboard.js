@@ -242,18 +242,43 @@
         <div class="form-row"><label>内容分级</label><select id="nRating">${ratingOptions('G')}</select><small class="form-tip">成熟/限制级内容默认对未成年读者隐藏</small></div>
         <div class="form-row"><label>简介</label><textarea id="nSummary" placeholder="一句话介绍你的作品…" rows="3"></textarea></div>
         <div class="form-row"><label>标签（空格或逗号分隔）</label><input type="text" id="nTags" placeholder="日常 治愈 温柔 佛尔思" /></div>
+        <div class="form-row"><label>封面（可选）</label>
+          <img id="nCoverPrev" class="cover-prev" alt="封面预览" style="display:none">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <input type="file" id="nCoverFile" accept="image/*" hidden>
+            <button type="button" class="btn btn-ghost btn-sm" id="nCoverUp">上传图片</button>
+            <input type="text" id="nCoverUrl" placeholder="或粘贴封面图片 URL" style="flex:1;min-width:180px">
+          </div>
+          <small class="form-tip">上传本地图片（≤5MB）或填写图片直链，作为作品卡片与详情页封面。</small>
+        </div>
         <div class="form-row"><label>状态</label>
           <select id="nStatus"><option value="ongoing">连载中</option><option value="completed">已完结</option></select>
         </div>
         <div class="form-tip">创建后作品将自动归入「佛休」主分类，作者署名默认为你的用户名，可在个人资料中修改简介。</div>
         <button class="btn btn-primary" type="submit">创建并添加章节</button>
       </form></div>`;
+    const nCoverFile = document.getElementById('nCoverFile');
+    document.getElementById('nCoverUp').onclick = () => nCoverFile.click();
+    nCoverFile.onchange = async () => {
+      const f = nCoverFile.files && nCoverFile.files[0];
+      if (!f) return;
+      if (f.size > 5 * 1024 * 1024) { toast('图片不能超过 5MB'); nCoverFile.value = ''; return; }
+      try {
+        const dataUrl = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(f); });
+        const up = await API.post('/upload', { data: dataUrl, name: f.name, type: f.type });
+        nCoverUrl.value = up.url;
+        nCoverPrev.src = up.url; nCoverPrev.style.display = 'block';
+        toast('封面上传成功');
+      } catch (e) { toast('上传失败：' + (e.message || '未知错误')); }
+      nCoverFile.value = '';
+    };
     document.getElementById('newForm').onsubmit = async (e) => {
       e.preventDefault();
       try {
         const r = await API.post('/works', {
           title: nTitle.value, type: nType.value, rating: nRating.value,
-          summary: nSummary.value, tags: nTags.value, status: nStatus.value
+          summary: nSummary.value, tags: nTags.value, status: nStatus.value,
+          cover: (nCoverUrl.value || '').trim()
         });
         toast('创建成功，现在添加章节吧', 'success');
         editingWorkId = r.work.id; activeTab = 'edit'; render();
@@ -280,6 +305,15 @@
           <div class="form-row"><label>内容分级</label><select id="eRating">${ratingOptions(w.rating)}</select></div>
           <div class="form-row"><label>简介</label><textarea id="eSummary" rows="3">${escapeHtml(w.summary)}</textarea></div>
           <div class="form-row"><label>标签（空格或逗号分隔）</label><input type="text" id="eTags" value="${escapeHtml(w.tags.join(' '))}" /></div>
+          <div class="form-row"><label>封面（可选）</label>
+            <img id="eCoverPrev" class="cover-prev" alt="封面预览" ${w.cover ? `src="${safeUrl(w.cover)}" style="display:block"` : 'style="display:none"'}>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <input type="file" id="eCoverFile" accept="image/*" hidden>
+              <button type="button" class="btn btn-ghost btn-sm" id="eCoverUp">上传图片</button>
+              <input type="text" id="eCoverUrl" value="${escapeHtml(w.cover || '')}" placeholder="或粘贴封面图片 URL" style="flex:1;min-width:180px">
+            </div>
+            <small class="form-tip">上传本地图片（≤5MB）或填写图片直链，作为作品卡片与详情页封面。</small>
+          </div>
           <div class="form-row"><label>状态</label>
             <select id="eStatus"><option value="ongoing" ${w.status === 'ongoing' ? 'selected' : ''}>连载中</option><option value="completed" ${w.status === 'completed' ? 'selected' : ''}>已完结</option></select>
           </div>
