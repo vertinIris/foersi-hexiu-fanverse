@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登录 / 注册 · 佛尔思 · 同人创作平台</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header id="nav"></header>
+  <main class="auth-wrap">
+    <div class="panel">
+      <div class="tabs">
+        <button id="tabLogin" class="active">登录</button>
+        <button id="tabReg">注册成为作者</button>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-row">
+          <label>用户名</label>
+          <input type="text" id="lUser" required />
+        </div>
+        <div class="form-row">
+          <label>密码</label>
+          <input type="password" id="lPass" required />
+        </div>
+        <button class="btn btn-primary" type="submit" style="width:100%">登录</button>
+        <p class="form-hint" id="loginHint">演示账号：休之笔 / demo1234</p>
+      </form>
+
+      <form id="regForm" style="display:none">
+        <div class="form-row">
+          <label>用户名</label>
+          <input type="text" id="rUser" required />
+        </div>
+        <div class="form-row">
+          <label>密码（至少 6 位）</label>
+          <input type="password" id="rPass" required minlength="6" />
+        </div>
+        <div class="form-row">
+          <label>邮箱（选填）</label>
+          <input type="email" id="rEmail" />
+        </div>
+        <div class="form-row">
+          <label>个人简介（选填）</label>
+          <textarea id="rBio" style="min-height:70px"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" style="width:100%">注册并进入</button>
+      </form>
+    </div>
+  </main>
+  <footer class="site"><div class="container">佛尔思 · 同人创作平台同人作品站 · 仅供同好交流创作 · © Demo（非官方二创站）</div>
+    <div class="footer-links container"><a href="/about.html">关于本站</a><a href="/legal.html">版权与非官方声明</a><a href="/characters.html">角色志</a></div></footer>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>佛尔思 · 同人创作平台</title>
+  <meta name="description" content="以佛尔思为中心的同人创作平台，收录佛休（佛尔思 × 休）同人小说、短篇与设定资料。" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header id="nav"></header>
+
+  <section class="hero container">
+    <p class="hero-kicker">佛尔思 × 休</p>
+    <h1>以佛尔思为中心的同人创作平台</h1>
+    <p>聚焦佛尔思的角色弧光、日常与冒险，也容纳她与休之间所有温柔或炽烈的相遇。阅读、收藏、留下 Kudos，让每一位作者的心血都被看见。</p>
+    <form class="hero-search" onsubmit="return goSearch(event)">
+      <input id="heroSearch" type="search" placeholder="搜索作品、标签或作者…" aria-label="搜索" />
+      <button type="submit">搜索</button>
+    </form>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="/browse.html">开始阅读</a>
+      <a class="btn btn-ghost" href="/auth.html">成为作者</a>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head"><h2>按类型浏览</h2><a href="/browse.html">全部 →</a></div>
+    <div class="chips" id="typeChips"></div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head"><h2>佛休 · 热门作品</h2><a href="/browse.html?sort=popular">更多 →</a></div>
+    <div class="grid" id="featuredGrid"></div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head"><h2>热门推荐</h2><a href="/browse.html?sort=popular">更多 →</a></div>
+    <div class="grid" id="popularGrid"></div>
+  </section>
+
+  <footer class="site">
+    <div class="container">佛尔思 · 同人创作平台 · 仅供同好交流创作 · 非官方二创站</div>
+    <div class="footer-links container">
+      <a href="/about.html">关于本站</a>
+      <a href="/legal.html">版权与非官方声明</a>
+      <a href="/characters.html">角色志</a>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+</html>

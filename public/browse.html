@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>书库 · 佛尔思 · 同人创作平台</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header id="nav"></header>
+  <main class="container section">
+    <div class="section-head"><h2>书库</h2></div>
+    <div class="browse-layout">
+      <aside class="filters" id="filters">
+        <div class="filter-group">
+          <div class="label">作品类型</div>
+          <div class="filter-list" id="typeList">
+            <a href="#" data-type="">全部</a>
+            <a href="#" data-type="novel">小说</a>
+            <a href="#" data-type="short">短篇</a>
+            <a href="#" data-type="setting">设定</a>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="label">状态</div>
+          <div class="filter-list">
+            <a href="#" data-status="">全部</a>
+            <a href="#" data-status="ongoing">连载中</a>
+            <a href="#" data-status="completed">已完结</a>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="label">标签</div>
+          <div class="tagcloud" id="sideTags"></div>
+        </div>
+      </aside>
+
+      <section>
+        <div class="toolbar">
+          <input type="search" id="localSearch" placeholder="在当前结果中筛选…" aria-label="筛选" />
+          <span class="spacer"></span>
+          <label class="filter-label" for="sortSel">排序</label>
+          <select id="sortSel">
+            <option value="newest">最近更新</option>
+            <option value="popular">最受欢迎</option>
+            <option value="views">最多阅读</option>
+          </select>
+        </div>
+        <div class="grid" id="worksGrid"></div>
+        <div class="pagination" id="pagination"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="container">佛尔思 · 同人创作平台 · 仅供同好交流创作 · 非官方二创站</div>
+    <div class="footer-links container">
+      <a href="/about.html">关于本站</a>
+      <a href="/legal.html">版权与非官方声明</a>
+      <a href="/characters.html">角色志</a>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/browse.js"></script>
+</body>
+</html>
